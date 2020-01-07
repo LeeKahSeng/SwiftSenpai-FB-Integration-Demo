@@ -23,11 +23,6 @@ class ViewController: UIViewController {
             
             print("FB Access Token: \(String(describing: AccessToken.current?.tokenString))")
         }
-        
-//        FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-//         // Optional: Place the button in the center of your view.
-//         loginButton.center = self.view.center;
-//         [self.view addSubview:loginButton];
     }
 
 
