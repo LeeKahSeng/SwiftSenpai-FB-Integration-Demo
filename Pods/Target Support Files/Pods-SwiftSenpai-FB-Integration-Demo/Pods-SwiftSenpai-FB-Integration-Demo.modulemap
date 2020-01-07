@@ -1,0 +1,6 @@
+framework module Pods_SwiftSenpai_FB_Integration_Demo {
+  umbrella header "Pods-SwiftSenpai-FB-Integration-Demo-umbrella.h"
+
+  export *
+  module * { export * }
+}
