@@ -8,7 +8,6 @@
 
 import UIKit
 import FBSDKLoginKit
-import FBSDKCoreKit
 
 class CustomButtonViewController: UIViewController {
     
