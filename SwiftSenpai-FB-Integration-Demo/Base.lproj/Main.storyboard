@@ -123,14 +123,41 @@
                     <view key="view" contentMode="scaleToFill" id="mVp-61-yP8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tkd-Ct-xON">
+                                <rect key="frame" x="164" y="424" width="86" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="8vY-Gf-D3b" eventType="touchUpInside" id="uNZ-Kc-yQA"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Du-PG-FrA">
+                                <rect key="frame" x="16" y="374" width="382" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="tkd-Ct-xON" firstAttribute="centerY" secondItem="mVp-61-yP8" secondAttribute="centerY" id="1qh-xh-fVO"/>
+                            <constraint firstItem="ZLk-rj-c2F" firstAttribute="trailing" secondItem="9Du-PG-FrA" secondAttribute="trailing" constant="16" id="4IF-Hr-jCo"/>
+                            <constraint firstItem="tkd-Ct-xON" firstAttribute="centerX" secondItem="mVp-61-yP8" secondAttribute="centerX" id="GgA-1G-l0Y"/>
+                            <constraint firstItem="9Du-PG-FrA" firstAttribute="leading" secondItem="ZLk-rj-c2F" secondAttribute="leading" constant="16" id="gnv-fJ-pUg"/>
+                            <constraint firstItem="tkd-Ct-xON" firstAttribute="top" secondItem="9Du-PG-FrA" secondAttribute="bottom" constant="20" id="kqX-CO-9zY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ZLk-rj-c2F"/>
                     </view>
                     <navigationItem key="navigationItem" id="9FV-jJ-5w7"/>
+                    <connections>
+                        <outlet property="loginButton" destination="tkd-Ct-xON" id="egA-hA-hOd"/>
+                        <outlet property="messageLabel" destination="9Du-PG-FrA" id="eoM-E0-yFd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J13-uS-dmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2009" y="1531"/>
+            <point key="canvasLocation" x="2008.6956521739132" y="1530.8035714285713"/>
         </scene>
     </scenes>
 </document>

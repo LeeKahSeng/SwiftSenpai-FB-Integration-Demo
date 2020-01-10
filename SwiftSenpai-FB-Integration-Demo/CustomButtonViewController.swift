@@ -7,24 +7,81 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class CustomButtonViewController: UIViewController {
-
+    
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var messageLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        updateButton(isLoggedIn: (AccessToken.current != nil))
+        updateMessage(with: Profile.current?.name)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func loginButtonTapped(_ sender: Any) {
+        
+        let loginManager = LoginManager()
+        
+        if let _ = AccessToken.current {
+            // Access token available -- user already logged in
+            // Perform log out
+            
+            loginManager.logOut()
+            updateButton(isLoggedIn: false)
+            updateMessage(with: nil)
+            
+        } else {
+            // Access token not available -- user already logged out
+            // Perform log in
+            
+            loginManager.logIn(permissions: [], from: self) { [weak self] (result, error) in
+                
+                // Check for error
+                guard error == nil else {
+                    // Error occured
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                // Check for cancel
+                guard let result = result, !result.isCancelled else {
+                    print("User cancelled login")
+                    return
+                }
+                
+                // Successfully logged in
+                self?.updateButton(isLoggedIn: true)
+                
+                Profile.loadCurrentProfile { (profile, error) in
+                    self?.updateMessage(with: Profile.current?.name)
+                }
+            }
+        }
     }
-    */
+}
 
+// MARK:- Private functions
+extension CustomButtonViewController {
+    
+    private func updateButton(isLoggedIn: Bool) {
+        let title = isLoggedIn ? "Log out 👋🏻" : "Log in 👍🏻"
+        loginButton.setTitle(title, for: .normal)
+    }
+    
+    private func updateMessage(with name: String?) {
+        
+        guard let name = name else {
+            // User already logged out
+            messageLabel.text = "Please log in with Facebook."
+            return
+        }
+        
+        // User already logged in
+        messageLabel.text = "Hello, \(name)!"
+    }
 }
