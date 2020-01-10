@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FBLoginButtonViewController.swift
 //  SwiftSenpai-FB-Integration-Demo
 //
 //  Created by Lee Kah Seng on 07/01/2020.
@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class ViewController: UIViewController {
+class FBLoginButtonViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

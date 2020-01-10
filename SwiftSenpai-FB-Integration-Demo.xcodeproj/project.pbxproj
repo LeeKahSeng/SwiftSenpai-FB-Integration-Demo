@@ -10,7 +10,7 @@
 		9B5C23BCCFB97BB2FA1B73C6 /* Pods_SwiftSenpai_FB_Integration_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9171507727239B8320222561 /* Pods_SwiftSenpai_FB_Integration_Demo.framework */; };
 		F982F70023C42F7E00FC8DA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982F6FF23C42F7E00FC8DA2 /* AppDelegate.swift */; };
 		F982F70223C42F7E00FC8DA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982F70123C42F7E00FC8DA2 /* SceneDelegate.swift */; };
-		F982F70423C42F7E00FC8DA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982F70323C42F7E00FC8DA2 /* ViewController.swift */; };
+		F982F70423C42F7E00FC8DA2 /* FBLoginButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F982F70323C42F7E00FC8DA2 /* FBLoginButtonViewController.swift */; };
 		F982F70723C42F7E00FC8DA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982F70523C42F7E00FC8DA2 /* Main.storyboard */; };
 		F982F70923C42F8000FC8DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F982F70823C42F8000FC8DA2 /* Assets.xcassets */; };
 		F982F70C23C42F8000FC8DA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F982F70A23C42F8000FC8DA2 /* LaunchScreen.storyboard */; };
@@ -23,7 +23,7 @@
 		F982F6FC23C42F7E00FC8DA2 /* SwiftSenpai-FB-Integration-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftSenpai-FB-Integration-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F982F6FF23C42F7E00FC8DA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F982F70123C42F7E00FC8DA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F982F70323C42F7E00FC8DA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F982F70323C42F7E00FC8DA2 /* FBLoginButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLoginButtonViewController.swift; sourceTree = "<group>"; };
 		F982F70623C42F7E00FC8DA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F982F70823C42F8000FC8DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F982F70B23C42F8000FC8DA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 			children = (
 				F982F6FF23C42F7E00FC8DA2 /* AppDelegate.swift */,
 				F982F70123C42F7E00FC8DA2 /* SceneDelegate.swift */,
-				F982F70323C42F7E00FC8DA2 /* ViewController.swift */,
+				F982F70323C42F7E00FC8DA2 /* FBLoginButtonViewController.swift */,
 				F982F70523C42F7E00FC8DA2 /* Main.storyboard */,
 				F982F70823C42F8000FC8DA2 /* Assets.xcassets */,
 				F982F70A23C42F8000FC8DA2 /* LaunchScreen.storyboard */,
@@ -206,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F982F70423C42F7E00FC8DA2 /* ViewController.swift in Sources */,
+				F982F70423C42F7E00FC8DA2 /* FBLoginButtonViewController.swift in Sources */,
 				F982F70023C42F7E00FC8DA2 /* AppDelegate.swift in Sources */,
 				F982F70223C42F7E00FC8DA2 /* SceneDelegate.swift in Sources */,
 			);
