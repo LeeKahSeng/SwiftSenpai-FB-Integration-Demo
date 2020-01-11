@@ -70,7 +70,7 @@ extension MYFacebookLoginButton {
                 
                 // Check for error
                 guard error == nil else {
-                    // Error occured
+                    // Error occurred
                     print(error!.localizedDescription)
                     
                     if let self = self {

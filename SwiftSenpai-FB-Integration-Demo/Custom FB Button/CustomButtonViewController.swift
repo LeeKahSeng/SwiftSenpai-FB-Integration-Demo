@@ -42,7 +42,7 @@ class CustomButtonViewController: UIViewController {
                 
                 // Check for error
                 guard error == nil else {
-                    // Error occured
+                    // Error occurred
                     print(error!.localizedDescription)
                     return
                 }
