@@ -39,7 +39,7 @@ extension MYFacebookLoginButton {
         
         responsibleViewController = findResponsibleViewController()
         
-        // Overried touch up inside event
+        // Override touch up inside event
         addTarget(self, action: #selector(touchUpInside(sender:)), for: .touchUpInside)
     }
     
