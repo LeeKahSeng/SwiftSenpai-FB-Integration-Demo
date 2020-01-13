@@ -22,12 +22,15 @@ class ReusableButtonViewController: UIViewController {
         // Implement login completion handler
         loginButton.loginCompletionHandler = { [weak self] (button, result) in
             switch result {
-            case .success( _):
+            case .success(let result):
+                print("Access token: \(String(describing: result.token?.tokenString))")
+                
                 // Show message after login completed
                 Profile.loadCurrentProfile { (profile, error) in
                     self?.updateMessage(with: Profile.current?.name)
                 }
-            case .failure( _):
+            case .failure(let error):
+                print("Error occurred: \(error.localizedDescription)")
                 break
             }
         }

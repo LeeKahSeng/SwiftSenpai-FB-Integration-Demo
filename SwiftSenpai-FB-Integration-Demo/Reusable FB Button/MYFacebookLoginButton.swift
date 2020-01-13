@@ -15,7 +15,7 @@ class MYFacebookLoginButton: UIButton {
     var loginCompletionHandler: ((MYFacebookLoginButton, Result<LoginManagerLoginResult, Error>) -> Void)?
     var logoutCompletionHandler: ((MYFacebookLoginButton) -> Void)?
     
-    private var responsibleViewController: UIViewController!
+    private weak var responsibleViewController: UIViewController!
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
