@@ -16,14 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKLoginButton.h"
+#import "TargetConditionals.h"
 
-#ifdef FBSDKCOCOAPODS
-#import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
-#else
-#import "FBSDKCoreKit+Internal.h"
-#endif
-#import "FBSDKLoginTooltipView.h"
+#if !TARGET_OS_TV
+
+ #import "FBSDKLoginButton.h"
+
+ #ifdef FBSDKCOCOAPODS
+  #import <FBSDKCoreKit/FBSDKCoreKit+Internal.h>
+ #else
+  #import "FBSDKCoreKit+Internal.h"
+ #endif
+
+ #import "FBSDKLoginTooltipView.h"
 
 static const CGFloat kFBLogoSize = 16.0;
 static const CGFloat kFBLogoLeftMargin = 6.0;
@@ -31,7 +36,7 @@ static const CGFloat kButtonHeight = 28.0;
 static const CGFloat kRightMargin = 8.0;
 static const CGFloat kPaddingBetweenLogoTitle = 8.0;
 
-@interface FBSDKLoginButton() <FBSDKButtonImpressionTracking>
+@interface FBSDKLoginButton () <FBSDKButtonImpressionTracking>
 @end
 
 @implementation FBSDKLoginButton
@@ -42,14 +47,14 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
   NSString *_userName;
 }
 
-#pragma mark - Object Lifecycle
+ #pragma mark - Object Lifecycle
 
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - Properties
+ #pragma mark - Properties
 
 - (FBSDKDefaultAudience)defaultAudience
 {
@@ -59,16 +64,6 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
 - (void)setDefaultAudience:(FBSDKDefaultAudience)defaultAudience
 {
   _loginManager.defaultAudience = defaultAudience;
-}
-
-- (FBSDKLoginBehavior)loginBehavior
-{
-  return _loginManager.loginBehavior;
-}
-
-- (void)setLoginBehavior:(FBSDKLoginBehavior)loginBehavior
-{
-  _loginManager.loginBehavior = loginBehavior;
 }
 
 - (UIFont *)defaultFont
@@ -82,20 +77,20 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
   }
 }
 
-#pragma mark - UIView
+ #pragma mark - UIView
 
 - (void)didMoveToWindow
 {
   [super didMoveToWindow];
 
-  if (self.window &&
-      ((self.tooltipBehavior == FBSDKLoginButtonTooltipBehaviorForceDisplay) || !_hasShownTooltipBubble)) {
+  if (self.window
+      && ((self.tooltipBehavior == FBSDKLoginButtonTooltipBehaviorForceDisplay) || !_hasShownTooltipBubble)) {
     [self performSelector:@selector(_showTooltipIfNeeded) withObject:nil afterDelay:0];
     _hasShownTooltipBubble = YES;
   }
 }
 
-#pragma mark - Layout
+ #pragma mark - Layout
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect
 {
@@ -120,9 +115,9 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
 {
   CGSize size = self.bounds.size;
   CGSize longTitleSize = [self sizeThatFits:size title:[self _longLogInTitle]];
-  NSString *title = (longTitleSize.width <= size.width ?
-                     [self _longLogInTitle] :
-                     [self _shortLogInTitle]);
+  NSString *title = (longTitleSize.width <= size.width
+    ? [self _longLogInTitle]
+    : [self _shortLogInTitle]);
   if (![title isEqualToString:[self titleForState:UIControlStateNormal]]) {
     [self setTitle:title forState:UIControlStateNormal];
   }
@@ -148,7 +143,7 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
   return CGSizeMake(buttonWidth, kButtonHeight);
 }
 
-#pragma mark - FBSDKButtonImpressionTracking
+ #pragma mark - FBSDKButtonImpressionTracking
 
 - (NSDictionary *)analyticsParameters
 {
@@ -165,7 +160,7 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
   return @"login";
 }
 
-#pragma mark - FBSDKButton
+ #pragma mark - FBSDKButton
 
 - (void)configureButton
 {
@@ -175,13 +170,13 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
   NSString *logOutTitle = [self _logOutTitle];
 
   [self configureWithIcon:nil
-                    title:logInTitle
-          backgroundColor:self.backgroundColor
-         highlightedColor:nil
-            selectedTitle:logOutTitle
-             selectedIcon:nil
-            selectedColor:self.backgroundColor
- selectedHighlightedColor:nil];
+                      title:logInTitle
+            backgroundColor:self.backgroundColor
+           highlightedColor:nil
+              selectedTitle:logOutTitle
+               selectedIcon:nil
+              selectedColor:self.backgroundColor
+   selectedHighlightedColor:nil];
   self.titleLabel.textAlignment = NSTextAlignmentCenter;
   [self addConstraint:[NSLayoutConstraint constraintWithItem:self
                                                    attribute:NSLayoutAttributeHeight
@@ -199,7 +194,7 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
                                              object:nil];
 }
 
-#pragma mark - Helper Methods
+ #pragma mark - Helper Methods
 
 - (void)_accessTokenDidChangeNotification:(NSNotification *)notification
 {
@@ -216,25 +211,41 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
 
     if (_userName) {
       NSString *localizedFormatString =
-      NSLocalizedStringWithDefaultValue(@"LoginButton.LoggedInAs", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                        @"Logged in as %@",
-                                        @"The format string for the FBSDKLoginButton label when the user is logged in");
+      NSLocalizedStringWithDefaultValue(
+        @"LoginButton.LoggedInAs",
+        @"FacebookSDK",
+        [FBSDKInternalUtility bundleForStrings],
+        @"Logged in as %@",
+        @"The format string for the FBSDKLoginButton label when the user is logged in"
+      );
       title = [NSString localizedStringWithFormat:localizedFormatString, _userName];
     } else {
       NSString *localizedLoggedIn =
-      NSLocalizedStringWithDefaultValue(@"LoginButton.LoggedIn", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                        @"Logged in using Facebook",
-                                        @"The fallback string for the FBSDKLoginButton label when the user name is not available yet");
+      NSLocalizedStringWithDefaultValue(
+        @"LoginButton.LoggedIn",
+        @"FacebookSDK",
+        [FBSDKInternalUtility bundleForStrings],
+        @"Logged in using Facebook",
+        @"The fallback string for the FBSDKLoginButton label when the user name is not available yet"
+      );
       title = localizedLoggedIn;
     }
     NSString *cancelTitle =
-    NSLocalizedStringWithDefaultValue(@"LoginButton.CancelLogout", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                      @"Cancel",
-                                      @"The label for the FBSDKLoginButton action sheet to cancel logging out");
+    NSLocalizedStringWithDefaultValue(
+      @"LoginButton.CancelLogout",
+      @"FacebookSDK",
+      [FBSDKInternalUtility bundleForStrings],
+      @"Cancel",
+      @"The label for the FBSDKLoginButton action sheet to cancel logging out"
+    );
     NSString *logOutTitle =
-    NSLocalizedStringWithDefaultValue(@"LoginButton.ConfirmLogOut", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                      @"Log Out",
-                                      @"The label for the FBSDKLoginButton action sheet to confirm logging out");
+    NSLocalizedStringWithDefaultValue(
+      @"LoginButton.ConfirmLogOut",
+      @"FacebookSDK",
+      [FBSDKInternalUtility bundleForStrings],
+      @"Log Out",
+      @"The label for the FBSDKLoginButton action sheet to confirm logging out"
+    );
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
@@ -245,7 +256,7 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
                                                    handler:nil];
     UIAlertAction *logout = [UIAlertAction actionWithTitle:logOutTitle
                                                      style:UIAlertActionStyleDestructive
-                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                   handler:^(UIAlertAction *_Nonnull action) {
                                                      [self->_loginManager logOut];
                                                      [self.delegate loginButtonDidLogOut:self];
                                                    }];
@@ -271,29 +282,40 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
     [_loginManager logInWithPermissions:self.permissions
                      fromViewController:[FBSDKInternalUtility viewControllerForView:self]
                                 handler:handler];
-
   }
 }
 
 - (NSString *)_logOutTitle
 {
-  return NSLocalizedStringWithDefaultValue(@"LoginButton.LogOut", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                           @"Log out",
-                                           @"The label for the FBSDKLoginButton when the user is currently logged in");
+  return NSLocalizedStringWithDefaultValue(
+    @"LoginButton.LogOut",
+    @"FacebookSDK",
+    [FBSDKInternalUtility bundleForStrings],
+    @"Log out",
+    @"The label for the FBSDKLoginButton when the user is currently logged in"
+  );
 }
 
 - (NSString *)_longLogInTitle
 {
-  return NSLocalizedStringWithDefaultValue(@"LoginButton.LogInContinue", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                           @"Continue with Facebook",
-                                           @"The long label for the FBSDKLoginButton when the user is currently logged out");
+  return NSLocalizedStringWithDefaultValue(
+    @"LoginButton.LogInContinue",
+    @"FacebookSDK",
+    [FBSDKInternalUtility bundleForStrings],
+    @"Continue with Facebook",
+    @"The long label for the FBSDKLoginButton when the user is currently logged out"
+  );
 }
 
 - (NSString *)_shortLogInTitle
 {
-  return NSLocalizedStringWithDefaultValue(@"LoginButton.LogIn", @"FacebookSDK", [FBSDKInternalUtility bundleForStrings],
-                                           @"Log in",
-                                           @"The short label for the FBSDKLoginButton when the user is currently logged out");
+  return NSLocalizedStringWithDefaultValue(
+    @"LoginButton.LogIn",
+    @"FacebookSDK",
+    [FBSDKInternalUtility bundleForStrings],
+    @"Log in",
+    @"The short label for the FBSDKLoginButton when the user is currently logged out"
+  );
 }
 
 - (void)_showTooltipIfNeeded
@@ -331,3 +353,5 @@ static const CGFloat kPaddingBetweenLogoTitle = 8.0;
 }
 
 @end
+
+#endif

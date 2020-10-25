@@ -16,9 +16,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "_FBSDKLoginRecoveryAttempter.h"
+#import "TargetConditionals.h"
 
-#import "FBSDKLoginKit+Internal.h"
+#if !TARGET_OS_TV
+
+ #import "_FBSDKLoginRecoveryAttempter.h"
+
+ #import "FBSDKLoginKit+Internal.h"
 
 @implementation _FBSDKLoginRecoveryAttempter
 
@@ -26,9 +30,9 @@
                      optionIndex:(NSUInteger)recoveryOptionIndex
                         delegate:(id)delegate
               didRecoverSelector:(SEL)didRecoverSelector
-                     contextInfo:(void *)contextInfo {
-
-  void(^handler)(BOOL) = ^(BOOL didRecover) {
+                     contextInfo:(void *)contextInfo
+{
+  void (^handler)(BOOL) = ^(BOOL didRecover) {
     [super completeRecovery:didRecover delegate:delegate didRecoverSelector:didRecoverSelector contextInfo:contextInfo];
   };
   NSSet *currentPermissions = [FBSDKAccessToken currentAccessToken].permissions;
@@ -45,3 +49,5 @@
 }
 
 @end
+
+#endif

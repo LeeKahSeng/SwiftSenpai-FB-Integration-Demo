@@ -10,16 +10,25 @@
 #endif
 #endif
 
+#import "FBSDKBasicUtility.h"
+#import "FBSDKCoreKit_Basics.h"
+#import "FBSDKCrashHandler.h"
+#import "FBSDKCrashObserving.h"
+#import "FBSDKJSONValue.h"
+#import "FBSDKLibAnalyzer.h"
+#import "FBSDKSafeCast.h"
+#import "FBSDKTypeUtility.h"
+#import "FBSDKURLSession.h"
+#import "FBSDKURLSessionTask.h"
+#import "FBSDKUserDataStore.h"
 #import "FBSDKAccessToken.h"
 #import "FBSDKApplicationDelegate.h"
 #import "FBSDKButton.h"
 #import "FBSDKConstants.h"
 #import "FBSDKCopying.h"
 #import "FBSDKCoreKit.h"
-#import "FBSDKGraphErrorRecoveryProcessor.h"
-#import "FBSDKGraphRequest.h"
-#import "FBSDKGraphRequestConnection.h"
-#import "FBSDKGraphRequestDataAttachment.h"
+#import "FBSDKDeviceButton.h"
+#import "FBSDKDeviceViewControllerBase.h"
 #import "FBSDKMeasurementEvent.h"
 #import "FBSDKMutableCopying.h"
 #import "FBSDKProfile.h"
@@ -38,6 +47,10 @@
 #import "FBSDKAppLinkTarget.h"
 #import "FBSDKAppLinkUtility.h"
 #import "FBSDKWebViewAppLinkResolver.h"
+#import "FBSDKGraphErrorRecoveryProcessor.h"
+#import "FBSDKGraphRequest.h"
+#import "FBSDKGraphRequestConnection.h"
+#import "FBSDKGraphRequestDataAttachment.h"
 
 FOUNDATION_EXPORT double FBSDKCoreKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char FBSDKCoreKitVersionString[];

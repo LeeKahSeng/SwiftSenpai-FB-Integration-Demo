@@ -16,14 +16,28 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "TargetConditionals.h"
 
-typedef void (^FBSDKDownloadCompletionBlock)(BOOL success);
+#if !TARGET_OS_TV
+
+ #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^FBSDKDownloadCompletionBlock)(void);
 
 @interface FBSDKModelManager : NSObject
 
 + (void)enable;
-+ (nullable NSDictionary *)getRules;
-+ (nullable NSString *)getWeightsPath:(NSString *_Nonnull)useCaseKey;
++ (nullable NSDictionary *)getRulesForKey:(NSString *)useCase;
++ (nullable NSData *)getWeightsForKey:(NSString *)useCase;
++ (nullable NSArray *)getThresholdsForKey:(NSString *)useCase;
+
++ (BOOL)processIntegrity:(nullable NSString *)param;
++ (NSString *)processSuggestedEvents:(NSString *)textFeature denseData:(nullable float *)denseData;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#endif

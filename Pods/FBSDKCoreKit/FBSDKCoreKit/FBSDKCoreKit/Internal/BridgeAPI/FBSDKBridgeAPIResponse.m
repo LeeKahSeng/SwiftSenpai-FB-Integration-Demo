@@ -16,25 +16,28 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKBridgeAPIResponse.h"
+#import "TargetConditionals.h"
 
-#import "FBSDKBridgeAPIProtocol.h"
-#import "FBSDKBridgeAPIProtocolType.h"
-#import "FBSDKBridgeAPIRequest+Private.h"
-#import "FBSDKInternalUtility.h"
-#import "FBSDKTypeUtility.h"
+#if !TARGET_OS_TV
+
+ #import "FBSDKBridgeAPIResponse.h"
+
+ #import "FBSDKBridgeAPIProtocol.h"
+ #import "FBSDKBridgeAPIProtocolType.h"
+ #import "FBSDKBridgeAPIRequest+Private.h"
+ #import "FBSDKInternalUtility.h"
 
 @interface FBSDKBridgeAPIResponse ()
 - (instancetype)initWithRequest:(FBSDKBridgeAPIRequest *)request
              responseParameters:(NSDictionary *)responseParameters
                       cancelled:(BOOL)cancelled
                           error:(NSError *)error
-NS_DESIGNATED_INITIALIZER;
+  NS_DESIGNATED_INITIALIZER;
 @end
 
 @implementation FBSDKBridgeAPIResponse
 
-#pragma mark - Class Methods
+ #pragma mark - Class Methods
 
 + (instancetype)bridgeAPIResponseWithRequest:(FBSDKBridgeAPIRequest *)request error:(NSError *)error
 {
@@ -50,18 +53,23 @@ NS_DESIGNATED_INITIALIZER;
                                        error:(NSError *__autoreleasing *)errorRef
 {
   FBSDKBridgeAPIProtocolType protocolType = request.protocolType;
-  switch (protocolType) {
-    case FBSDKBridgeAPIProtocolTypeNative:{
-      if (![FBSDKInternalUtility isFacebookBundleIdentifier:sourceApplication]) {
-        return nil;
+  if (@available(iOS 13.0, *)) {
+    // SourceApplication is not available in iOS 13.
+    // https://forums.developer.apple.com/thread/119118
+  } else {
+    switch (protocolType) {
+      case FBSDKBridgeAPIProtocolTypeNative: {
+        if (![FBSDKInternalUtility isFacebookBundleIdentifier:sourceApplication]) {
+          return nil;
+        }
+        break;
       }
-      break;
-    }
-    case FBSDKBridgeAPIProtocolTypeWeb:{
-      if (![FBSDKInternalUtility isSafariBundleIdentifier:sourceApplication]) {
-        return nil;
+      case FBSDKBridgeAPIProtocolTypeWeb: {
+        if (![FBSDKInternalUtility isSafariBundleIdentifier:sourceApplication]) {
+          return nil;
+        }
+        break;
       }
-      break;
     }
   }
   NSDictionary<NSString *, NSString *> *const queryParameters = [FBSDKBasicUtility dictionaryWithQueryString:responseURL.query];
@@ -95,7 +103,7 @@ NS_DESIGNATED_INITIALIZER;
                                  error:nil];
 }
 
-#pragma mark - Object Lifecycle
+ #pragma mark - Object Lifecycle
 
 - (instancetype)initWithRequest:(FBSDKBridgeAPIRequest *)request
              responseParameters:(NSDictionary *)responseParameters
@@ -111,7 +119,7 @@ NS_DESIGNATED_INITIALIZER;
   return self;
 }
 
-#pragma mark - NSCopying
+ #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -119,3 +127,5 @@ NS_DESIGNATED_INITIALIZER;
 }
 
 @end
+
+#endif

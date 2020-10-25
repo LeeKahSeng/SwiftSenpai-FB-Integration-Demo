@@ -1,14 +1,14 @@
 PODS:
-  - FBSDKCoreKit (5.13.1):
-    - FBSDKCoreKit/Basics (= 5.13.1)
-    - FBSDKCoreKit/Core (= 5.13.1)
-  - FBSDKCoreKit/Basics (5.13.1)
-  - FBSDKCoreKit/Core (5.13.1):
+  - FBSDKCoreKit (8.0.0):
+    - FBSDKCoreKit/Basics (= 8.0.0)
+    - FBSDKCoreKit/Core (= 8.0.0)
+  - FBSDKCoreKit/Basics (8.0.0)
+  - FBSDKCoreKit/Core (8.0.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.13.1):
-    - FBSDKLoginKit/Login (= 5.13.1)
-  - FBSDKLoginKit/Login (5.13.1):
-    - FBSDKCoreKit (~> 5.0)
+  - FBSDKLoginKit (8.0.0):
+    - FBSDKLoginKit/Login (= 8.0.0)
+  - FBSDKLoginKit/Login (8.0.0):
+    - FBSDKCoreKit (~> 8.0.0)
 
 DEPENDENCIES:
   - FBSDKCoreKit
@@ -20,9 +20,9 @@ SPEC REPOS:
     - FBSDKLoginKit
 
 SPEC CHECKSUMS:
-  FBSDKCoreKit: 8fb98209109fb684937f05d534305edb18c20207
-  FBSDKLoginKit: c7c6ffd9ca9ea45aee32361840af040ad8f6706a
+  FBSDKCoreKit: 9d27fe97a2fa2abe5eeefea8240e837623ab88e0
+  FBSDKLoginKit: 2cbaf5405379731b22f2ebc224f7c30f62378171
 
 PODFILE CHECKSUM: 1b219cf9f57b761f06869461210c3ec2aaab422b
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3
